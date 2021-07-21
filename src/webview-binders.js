@@ -117,12 +117,14 @@ export const webviewEvents = types => target => {
     });
   };
   target.prototype.addEventListener = function(type, callback) {
-    this.addMessageListener(message => {
+    console.log('webview-binders | addEventListener');
+    const listener = (message => {
+      console.log('webview-binders | addMessageListener');
       if (
         message &&
-        message.type === 'event' &&
-        message.payload.target[WEBVIEW_TARGET] === this[WEBVIEW_TARGET] &&
-        message.payload.type === type
+          message.type === 'event' &&
+          message.payload.target[WEBVIEW_TARGET] === this[WEBVIEW_TARGET] &&
+          message.payload.type === type
       ) {
         for (const key in message.payload.target) {
           const value = message.payload.target[key];
@@ -136,5 +138,13 @@ export const webviewEvents = types => target => {
         });
       }
     });
+    // this.addMessageListener(listener);
+    return this.addMessageListener(listener);
+  };
+
+
+  target.prototype.removeEventListener = function(listener) {
+    console.log('webview-binders | removeEventListener');
+    this.removeMessageListener(listener);
   };
 };

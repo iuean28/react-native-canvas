@@ -26,6 +26,13 @@ export default class Image {
   };
 
   addMessageListener = listener => {
+    console.log('image | addMessageListener')
+    console.log('listener', listener)
     return this.canvas.addMessageListener(listener);
+  };
+
+  removeMessageListener = listener => {
+    console.log('image | removeMessageListener')
+    return this.canvas.removeMessageListener(listener);
   };
 }

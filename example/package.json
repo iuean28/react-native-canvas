@@ -8,8 +8,11 @@
     "ios": "react-native run-ios"
   },
   "dependencies": {
-    "react": "^16.8.6",
-    "react-native": "^0.59.8",
-    "react-native-canvas": "^0.1.28"
+    "react": "^17.0.0",
+    "react-i18next": "^11.4.0",
+    "react-native": "^0.64.0",
+    "react-native-background-timer": "^2.4.1",
+    "react-native-canvas": "git://github.com/iuean28/react-native-canvas.git#custom-font-api",
+    "react-native-webview": "^11.6.5"
   }
 }

@@ -14,6 +14,9 @@ const Example = ({sample, children}) => (
 
 export default class App extends Component {
   handleImageData(canvas) {
+    if (!canvas) {
+      return;
+    }
     canvas.width = 100;
     canvas.height = 100;
 
@@ -35,6 +38,9 @@ export default class App extends Component {
   }
 
   async handlePurpleRect(canvas) {
+    if (!canvas) {
+      return;
+    }
     canvas.width = 100;
     canvas.height = 100;
 
@@ -47,6 +53,9 @@ export default class App extends Component {
   }
 
   handleRedCircle(canvas) {
+    if (!canvas) {
+      return;
+    }
     canvas.width = 100;
     canvas.height = 100;
 
@@ -57,20 +66,26 @@ export default class App extends Component {
     context.fill();
   }
 
-  handleImageRect(canvas) {
-    const image = new CanvasImage(canvas);
-    canvas.width = 100;
-    canvas.height = 100;
+  // handleImageRect(canvas) {
+  //   if (!canvas) {
+  //     return;
+  //   }
+  //   const image = new CanvasImage(canvas);
+  //   canvas.width = 100;
+  //   canvas.height = 100;
 
-    const context = canvas.getContext('2d');
+  //   const context = canvas.getContext('2d');
 
-    image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/63/Biho_Takashi._Bat_Before_the_Moon%2C_ca._1910.jpg';
-    image.addEventListener('load', () => {
-      context.drawImage(image, 0, 0, 100, 100);
-    });
-  }
+  //   image.src = 'https://upload.wikimedia.org/wikipedia/commons/6/63/Biho_Takashi._Bat_Before_the_Moon%2C_ca._1910.jpg';
+  //   image.addEventListener('load', () => {
+  //     context.drawImage(image, 0, 0, 100, 100);
+  //   });
+  // }
 
   handlePath(canvas) {
+    if (!canvas) {
+      return;
+    }
     canvas.width = 100;
     canvas.height = 100;
     const context = canvas.getContext('2d');
@@ -94,6 +109,9 @@ export default class App extends Component {
   }
 
   async handleGradient(canvas) {
+    if (!canvas) {
+      return;
+    }
     canvas.width = 100;
     canvas.height = 100;
     const ctx = canvas.getContext('2d');
@@ -105,6 +123,9 @@ export default class App extends Component {
   }
 
   handleEmbedHTML(canvas) {
+    if (!canvas) {
+      return;
+    }
     const image = new CanvasImage(canvas);
     canvas.width = 100;
     canvas.height = 100;
@@ -124,15 +145,29 @@ export default class App extends Component {
 </svg>
 `;
     image.src = `data:image/svg+xml,${encodeURIComponent(svgString)}`;
+    // const imageLoad = () => {
+    //   context.drawImage(image, 0, 0, 100, 100);
+    //   image.removeEventListener('load', () => {
+    //     console.log('diu');
+    //   });
+    // }
 
-    image.addEventListener('load', () => {
+    // image.addEventListener('load', imageLoad);
+    const removeImageLoad = image.addEventListener('load', () => {
       context.drawImage(image, 0, 0, 100, 100);
+      removeImageLoad();
+
+      image.src = 'https://www.google.com.hk/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png';
+
     });
   }
-/**
+  /**
  * For example used google font
  */
   handleCustomFont(canvas) {
+    if (!canvas) {
+      return;
+    }
     const image = new CanvasImage(canvas);
     const ctx = canvas.getContext('2d');
 
@@ -143,13 +178,13 @@ export default class App extends Component {
     ctx.strokeStyle = 'black';
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
     ctx.restore();
-    
+
     canvas
       .addFont({
         name: 'Miss Fajardose',
         link: 'https://fonts.gstatic.com/l/font?kit=_Xmz-GY4rjmCbQfc-aPRaa4pqV340p7EZl5bwkcU4V55dc7XaVkOCo1Q-D-x1hYOZdAwD85gO8PnV3aw17Bcb_EJ-4NA_8H607rOs33MkhY8f7wbUWAdDQ2n1QB3eW3jcHe0AN51VVnuPiTMOVWKPaSDGFmHIHXVFubF6rRfNxY45LnE1RQ5DyQMd9Ji48bXLyygkZ3MoMVyaLdVNg8nVZJ-nR_Yf3UVbtEIyw&skey=f0bf0703ab573473&v=v7',
       })
-      .then((res) => {
+      .then(res => {
         ctx.font = 'bold 20px Miss Fajardose';
         ctx.fillText('Hello Font', 5, 52);
       });
@@ -160,7 +195,7 @@ export default class App extends Component {
       <View style={styles.container}>
         <StatusBar hidden={true} />
         <ScrollView style={styles.examples}>
-          <Example sample={require('./images/purple-black-rect.png')}>
+          {/* <Example sample={require('./images/purple-black-rect.png')}>
             <Canvas ref={this.handleImageData} />
           </Example>
           <Example sample={require('./images/purple-rect.png')}>
@@ -168,22 +203,22 @@ export default class App extends Component {
           </Example>
           <Example sample={require('./images/red-circle.png')}>
             <Canvas ref={this.handleRedCircle} />
-          </Example>
-          <Example sample={require('./images/image-rect.png')}>
+          </Example> */}
+          {/* <Example sample={require('./images/image-rect.png')}>
             <Canvas ref={this.handleImageRect} />
-          </Example>
-          <Example sample={require('./images/path.png')}>
+          </Example> */}
+          {/* <Example sample={require('./images/path.png')}>
             <Canvas ref={this.handlePath} />
           </Example>
           <Example sample={require('./images/gradient.png')}>
             <Canvas ref={this.handleGradient} />
-          </Example>
+          </Example> */}
           <Example sample={require('./images/embed-html.png')}>
             <Canvas ref={this.handleEmbedHTML} />
           </Example>
-          <Example sample={require('./images/custom-font.png')}>
+          {/* <Example sample={require('./images/custom-font.png')}>
             <Canvas ref={this.handleCustomFont} />
-          </Example>
+          </Example> */}
         </ScrollView>
       </View>
     );

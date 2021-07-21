@@ -31,11 +31,14 @@ export default class Canvas extends Component {
   };
 
   addMessageListener = listener => {
+    console.log('Canvas | addMessageListener');
     this.listeners.push(listener);
     return () => this.removeMessageListener(listener);
   };
 
   removeMessageListener = listener => {
+    console.log('Canvas | removeMessageListener');
+    console.log(this.listeners.indexOf(listener));
     this.listeners.splice(this.listeners.indexOf(listener), 1);
   };
 
@@ -80,6 +83,7 @@ export default class Canvas extends Component {
         throw error;
       }
       case 'json': {
+        console.log('Canvas | postMessage | json');
         return payload;
       }
       case 'blob': {
@@ -89,7 +93,9 @@ export default class Canvas extends Component {
   };
 
   handleMessage = e => {
+    console.log('Canvas | handleMessage');
     let data = JSON.parse(e.nativeEvent.data);
+    console.log('data', data);
     switch (data.type) {
       case 'log': {
         // eslint-disable-line no-console
@@ -112,6 +118,7 @@ export default class Canvas extends Component {
             };
           }
           for (const listener of this.listeners) {
+            console.log('Canvas | handleMessage | default');
             listener(data.payload);
           }
         }

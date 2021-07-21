@@ -282,6 +282,7 @@ function handleMessage({id, type, payload}) {
     }
     case 'listen': {
       const {types, target} = payload;
+      console.log('webview | case:listen')
       for (const eventType of types) {
         targets[target].addEventListener(eventType, e => {
           const message = toMessage({
