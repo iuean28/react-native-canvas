@@ -95,7 +95,6 @@ export default class Canvas extends Component {
   handleMessage = e => {
     console.log('Canvas | handleMessage');
     let data = JSON.parse(e.nativeEvent.data);
-    console.log('data', data);
     switch (data.type) {
       case 'log': {
         // eslint-disable-line no-console

@@ -148,7 +148,6 @@ export default class App extends Component {
     // const imageLoad = () => {
     //   context.drawImage(image, 0, 0, 100, 100);
     //   image.removeEventListener('load', () => {
-    //     console.log('diu');
     //   });
     // }
 

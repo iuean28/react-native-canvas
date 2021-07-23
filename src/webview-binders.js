@@ -138,8 +138,8 @@ export const webviewEvents = types => target => {
         });
       }
     });
-    // this.addMessageListener(listener);
-    return this.addMessageListener(listener);
+    this.addMessageListener(listener);
+    // return this.addMessageListener(listener);
   };
 
 
